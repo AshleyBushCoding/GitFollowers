@@ -38,6 +38,10 @@ def api_id():
 
     results = query_followers(userId, maxFollowers)
 
+    #check for the empty list
+    if not results:
+        return "No followers found for the initial user provided."
+
     #capture timeout/tempblock error
     if(results[-1].get('FollowerErrorMessage') is not None):
         return '<h1>Potentially Incomplete List</h1>\
