@@ -38,9 +38,11 @@ def query_followers(githubId, maxNumFollowers = 5):
     level1 = get_followers(githubId, maxNumFollowers)
     queryIndex = 0 #search start point for next round
     errMessage = [{"FollowerErrorMessage" : 
-        "An unexpected error occurred. The data may or may not be truncated.\n \
-         If you see this message repeatedly, it's likely your IP has been blocked \n \
-         on the server. See https://developer.github.com/v3/#rate-limiting."}]
+        "An unexpected error occurred. Check the user name and try again. \n \
+         The data may or may not be truncated.\n \
+         If you see this message repeatedly, either the user doesn't exist \n \
+         or it's likely your IP has been blocked on the server. \n \
+         See https://developer.github.com/v3/#rate-limiting."}]
 
     # make sure list is not empty--empty lists==false.
     if not level1:
