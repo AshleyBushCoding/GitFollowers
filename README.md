@@ -6,7 +6,7 @@ For api implementation:
 
 Homepage: http://127.0.0.1:5000/
 
-Followers page: http://127.0.0.1:5000/api/v1/resources/followers?id=<NAME>&maxFollowers=<NUMBER> , replacing <NAME> with the username of the GitHub user searched for, and <NUMBER> with the max number of followers for the user you want returned (maximum is no more than 5 per user).
+Followers page: http://127.0.0.1:5000/api/v1/resources/followers?id=NAME&maxFollowers=NUMBER , replacing NAME with the username of the GitHub user searched for, and NUMBER with the max number of followers for the user you want returned (maximum is no more than 5 per user).
   Full example: http://127.0.0.1:5000/api/v1/resources/followers?id=jskeet&maxFollowers=2
   
   Note that maxFollowers will be capped at 5 to prevent timeouts on the PC (each call will increase the base by a power of 5. It will get large quickly).
