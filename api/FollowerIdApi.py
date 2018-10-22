@@ -42,6 +42,10 @@ def query_followers(githubId, maxNumFollowers = 5):
          If you see this message repeatedly, it's likely your IP has been blocked \n \
          on the server. See https://developer.github.com/v3/#rate-limiting."}]
 
+    # make sure list is not empty--empty lists==false.
+    if not level1:
+        return
+
     # make sure before adding anything to the final list
     # that it's legit data.
     for dictionary in level1:
@@ -61,6 +65,9 @@ def query_followers(githubId, maxNumFollowers = 5):
             userId = dictionary.get('login')
             if(userId is not None):
                 level2 = get_followers(userId, maxNumFollowers)
+                #if the list is empty, continue loop. Else, add item.
+                if not level2:
+                    continue
                 finalList.extend(level2)
         else: #not dictionary, may be error
             finalList.extend(errMessage)
@@ -74,6 +81,9 @@ def query_followers(githubId, maxNumFollowers = 5):
             userId = dictionary.get('login')
             if(userId is not None):
                 level3 = get_followers(userId, maxNumFollowers)
+                #again, don't add empty list to final list of items
+                if not level3:
+                    continue
                 finalList.extend(level3)
         else: #not dictionary, may be error
             finalList.extend(errMessage)
