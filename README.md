@@ -17,12 +17,12 @@ use escape characters on spaces in the file name. Ex: cd "C:\Downloads\VMTest\Gi
 Homepage: http://127.0.0.1:5000/
 
 Followers page: http://127.0.0.1:5000/api/v1/resources/followers?id=NAME&maxFollowers=NUMBER , replacing NAME with the username of the GitHub user searched for, and NUMBER with the max number of followers for the user you want returned (maximum is no more than 5 per user).
-  Full example: http://127.0.0.1:5000/api/v1/resources/followers?id=jskeet&maxFollowers=2
+  Full example URL: http://127.0.0.1:5000/api/v1/resources/followers?id=jskeet&maxFollowers=2
   
   Note that:
   1) maxFollowers is an OPTIONAL parameter. It has a default of 5 followers. It can be omitted from the query without issue.
   2) maxFollowers will be capped at 5 to prevent timeouts on the PC (each call will increase the base by a power of 5. It will get large quickly).
-  
+ 
 
 Finally, this is an unauthenticated application. As such, there can only be so many requests from the same IP per hour before the user is prevented from using the website. 
 
