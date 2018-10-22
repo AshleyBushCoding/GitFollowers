@@ -62,9 +62,10 @@ A user name with improper symbols: http://127.0.0.1:5000/api/v1/resources/follow
 A user that will return a full list regardless of follower size: http://127.0.0.1:5000/api/v1/resources/followers?id=jskeet&maxFollowers=5
   - Will produce the full tree, shows code can handle it
 
-Repeated calls to trigger the IP block: http://127.0.0.1:5000/api/v1/resources/followers?id=jskeet&maxFollowers=5 done 2-3 times
-  -Will display error message 
-  -NOTE tester will be prevented from testing at this point for ~ 1 hr!!!
+Repeated calls to trigger the IP block: http://127.0.0.1:5000/api/v1/resources/followers?id=jskeet&maxFollowers=5 
+  - Do this two or three times
+  - Will display error message 
+  - NOTE tester will be prevented from testing at this point for ~ 1 hr!!!
 
 
 #####################################################################################################################################
