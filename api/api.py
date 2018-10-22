@@ -30,7 +30,8 @@ def api_id():
         return "Error: No user ID provided. Please specify an id."
 
     if 'maxFollowers' in request.args:
-        maxFollowers = int(request.args['maxFollowers'])
+        if(int(request.args['maxFollowers']) <= 5):
+            maxFollowers = int(request.args['maxFollowers'])
     else:
         maxFollowers = 5
 

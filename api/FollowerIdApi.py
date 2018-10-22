@@ -85,6 +85,6 @@ if __name__ == '__main__':
     Please enter userId of the GitHub member you are finding the \n \
     followers of at the end of the website. You can also optionally add in \n \
     the number of followers per person referenced (up to 5). \n \
-    Ex: http://127.0.0.1:5000/api/v1/resources/followers?id=jskeet&&maxNumFollowers=2")
+    Ex: http://127.0.0.1:5000/api/v1/resources/followers?id=jskeet&maxNumFollowers=2")
 
       
