@@ -41,16 +41,23 @@ def api_id():
         return "No followers found for the initial user provided."
 
     #capture timeout/tempblock error
-    if(results[-1].get('FollowerErrorMessage') is not None):
-        return '<h1>Potentially Incomplete List</h1>\
-        <h3> An unexpected error occurred. Check the user name and try again. \n \
-         The data may or may not be truncated.\n \
-         If you see this message repeatedly, either the user doesn\'t exist \n \
-         or it\'s likely your IP has been blocked \n \
-         on the server. See  <a href="https://developer.github.com/v3/#rate-limiting"> \
-         https://developer.github.com/v3/#rate-limiting </a>. </h3>\
-        <p>' + 'Available data below: \n' + str(results) + '</p>'
-
+    # error being thrown two different ways--capturing when the returned 
+    # error is present as well as the conversion error.
+    try:    
+        if(results[-1].get('FollowerErrorMessage') is not None):
+            return '<h1>Potentially Incomplete List</h1>\
+            <h3> An unexpected error occurred. Check the user name and try again. \n \
+            The data may or may not be truncated.\n \
+            If you see this message repeatedly, either the user doesn\'t exist \n \
+            or it\'s likely your IP has been blocked \n \
+            on the server. See  <a href="https://developer.github.com/v3/#rate-limiting"> \
+            https://developer.github.com/v3/#rate-limiting </a>. </h3>\
+            <p>' + 'Available data below: \n' + str(results) + '</p>'
+    except:
+            return '<h1>Potentially Incomplete List</h1>\
+            <h3> An unexpected error occurred. </h3>\
+            <p>' + 'Available data below: \n' + str(results) + '</p>'
+    
     # Use the jsonify function from Flask to convert our list of
     # Python dictionaries to the JSON format.
     return jsonify(results)
