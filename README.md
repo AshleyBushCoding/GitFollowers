@@ -31,20 +31,32 @@ From https://developer.github.com/v3/#rate-limiting:
 "For unauthenticated requests, the rate limit allows for up to 60 requests per hour. Unauthenticated requests are associated with the originating IP address, and not the user making requests."
 
 
-Testing and ways to test:
+Testing and ways to test (if server is running from api.py script, clicking these links will produce the result described):
 
 The easiest way to test this project is to just enter some data in the address bar. For example:
 
 A user that doesn't exist: http://127.0.0.1:5000/api/v1/resources/followers?id=animeInaction
+  - Produces error page.
   - Should produce the error message page.
 
 A user that will have a very small (less than 5) result tree: http://127.0.0.1:5000/api/v1/resources/followers?id=DuilioAquino
+  - Shows the small list of results (currently 3)
   - Shows code can handle small results with lots of dead ends
 
 A user with no followers:http://127.0.0.1:5000/api/v1/resources/followers?id=AshleyBushCoding
+  - Produces error page.
   - Shows code handles that exception appropriately
+
+No user name: http://127.0.0.1:5000/api/v1/resources/followers
+  - Produces error page.
+  - Shows code will properly deal with missing entries
+  
+No user name but max followers:  http://127.0.0.1:5000/api/v1/resources/followers?maxFollowers=5 
+  - Produces error page.
+  - Shows code will properly deal with missing entries.
   
 A user name with improper symbols: http://127.0.0.1:5000/api/v1/resources/followers?id=j^skeet
+  - Produces error page.
   - Shows code will properly deal with invalid entries
   
 A user that will return a full list regardless of follower size: http://127.0.0.1:5000/api/v1/resources/followers?id=jskeet&maxFollowers=5
