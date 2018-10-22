@@ -1,8 +1,14 @@
 For api implementation:
 
 1) Make sure you have both git and python (3.7) installed locally, or that you are able to run both on your PC.
+
 2) Download the code in this repo locally. Make sure that all files (FollowerId, api) are in the api folder
-3) Start the api by going to the appropriate page:
+
+3) Start the api by running the api script on the command line (after navigating to the folder with the api from the command line, use "python api.py", without quotes. This may be slightly different depending on your python version and OS. This was done in Windows 10 in the terminal.)
+Navigation tips: can do "cd" to change the directory (no quotes), and if you use quote marks around the file path, you don't have to
+use escape characters on spaces in the file name. Ex: cd "C:\Downloads\VMTest\GitFollowers\api" , and then you can start the program.
+
+4) Navigate the api by going to the appropriate page:
 
 Homepage: http://127.0.0.1:5000/
 
