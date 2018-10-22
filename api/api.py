@@ -29,14 +29,23 @@ def api_id():
     else:
         return "Error: No user ID provided. Please specify an id."
 
+    # maxFollowers capped at 5 to prevent massive growth of the tree (max 5^5)
     if 'maxFollowers' in request.args:
         if(int(request.args['maxFollowers']) <= 5):
             maxFollowers = int(request.args['maxFollowers'])
     else:
         maxFollowers = 5
 
-    # Create an empty list for our results
     results = query_followers(userId, maxFollowers)
+
+    #capture timeout/tempblock error
+    if(results[-1].get('FollowerErrorMessage') is not None):
+        return '<h1>Potentially Incomplete List</h1>\
+        <h3> An unexpected error occurred. The data may or may not be truncated.\n \
+         If you see this message repeatedly, it\'s likely your IP has been blocked \n \
+         on the server. See  <a href="https://developer.github.com/v3/#rate-limiting"> \
+         https://developer.github.com/v3/#rate-limiting </a>. </h3>\
+        <p>' + 'Available data below: \n' + str(results) + '</p>'
 
     # Use the jsonify function from Flask to convert our list of
     # Python dictionaries to the JSON format.

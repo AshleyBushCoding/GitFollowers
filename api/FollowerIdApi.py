@@ -13,14 +13,8 @@
 
 
 import requests #for the API calls
-import sys #for command line argument
-import json #for making sure json stays as such!
 
 def get_followers(githubId, maxNumFollowers = 5):
-    
-    #DO: check and see if name is valid
-    #add a payload and see if you can get it to work
-    #payload = {'key': 'value}
 
     #per github v3 API, per_page allows for making a limit on 
     # returned items (up to 100). Without it, returns every follower 
@@ -28,47 +22,62 @@ def get_followers(githubId, maxNumFollowers = 5):
         + "?per_page=" + str(maxNumFollowers)
 
     response = requests.get(githubApiLink)
-    #DO: confirm response was ok before proceeding further
-    # example: (response.status_code == requests.code.ok)
+    #Note: JSON response returned may be an error. Valid, but less useful.
     return response.json()
 
 def query_followers(githubId, maxNumFollowers = 5):
-    #note, recursion won't work here because you need to break it at level 3
-    #all variables will eventually be stored in response
-    #unauthenticated apps can only so may queries per minute and hour 
+    # Note, recursion won't work here because you need to break it at level 3
+    # all variables will eventually be stored in response
+    # 
+    # Note: unauthenticated apps can only so may queries per minute and hour 
     # (might be as low as 60 queries per hour). at 3 levels of calls, 
-    # 5 each, we're at 5^3, or 125 calls at min. 
+    # 5 each, we're at 5^2 (first level is 5^0), or 25 calls a min.
+    # To do more, app will need to be authenticated.
+     
     finalList = []
     level1 = get_followers(githubId, maxNumFollowers)
     queryIndex = 0 #search start point for next round
+    errMessage = [{"FollowerErrorMessage" : 
+        "An unexpected error occurred. The data may or may not be truncated.\n \
+         If you see this message repeatedly, it's likely your IP has been blocked \n \
+         on the server. See https://developer.github.com/v3/#rate-limiting."}]
+
+    # make sure before adding anything to the final list
+    # that it's legit data.
+    for dictionary in level1:
+        if(type(dictionary) is dict):
+            continue
+        else: #not dictionary, may be error
+            finalList.extend(errMessage)
+            return finalList            
 
     finalList.extend(level1) #level1 is a list    
     stopIndex = len(finalList)
-    #DO: CONFIRM Response is not empty before going further!!!!!!!
-    #or that it's response is not "exceeded access allowed"
 
     # get second level of followers
     for dictionary in finalList[queryIndex : stopIndex]:
-         #DO: confirm that it returns a good value
-         #DO: check that the "dictionary" here isn't a string that says "limit exceeded"
         if(type(dictionary) is dict):
             queryIndex += 1
             userId = dictionary.get('login')
             if(userId is not None):
                 level2 = get_followers(userId, maxNumFollowers)
                 finalList.extend(level2)
+        else: #not dictionary, may be error
+            finalList.extend(errMessage)
+            return finalList
 
     #get third level of followers
     stopIndex = len(finalList)
     for dictionary in finalList[queryIndex : stopIndex]:
-        #DO: confirm that it returns a good value
-        #DO: check that the "dictionary" here isn't a string that says "limit exceeded"
         if(type(dictionary) is dict):
             queryIndex += 1      
             userId = dictionary.get('login')
             if(userId is not None):
                 level3 = get_followers(userId, maxNumFollowers)
                 finalList.extend(level3)
+        else: #not dictionary, may be error
+            finalList.extend(errMessage)
+            return finalList
 
     return finalList
 
