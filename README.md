@@ -18,7 +18,11 @@ Followers page: http://127.0.0.1:5000/api/v1/resources/followers?id=NAME&maxFoll
   Note that maxFollowers will be capped at 5 to prevent timeouts on the PC (each call will increase the base by a power of 5. It will get large quickly).
   
 
+Finally, this is an unauthenticated application. As such, there can only be so many requests from the same IP per hour before the user is prevented from using the website. 
 
+From https://developer.github.com/v3/#rate-limiting:
+
+"For unauthenticated requests, the rate limit allows for up to 60 requests per hour. Unauthenticated requests are associated with the originating IP address, and not the user making requests."
 
 
 
