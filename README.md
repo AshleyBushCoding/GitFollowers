@@ -1,3 +1,7 @@
+GitFollowers is an api endpoint designed to grab the followers of a given userId (up to 5 followers). 
+It takes those followers and finds their followers (again, up to five followers)
+It takes those followers and finds their followers (again, up to five followers per person).
+
 For api implementation:
 
 1) Make sure you have both git and python (3.7) installed locally, or that you are able to run both on your PC.
@@ -15,7 +19,9 @@ Homepage: http://127.0.0.1:5000/
 Followers page: http://127.0.0.1:5000/api/v1/resources/followers?id=NAME&maxFollowers=NUMBER , replacing NAME with the username of the GitHub user searched for, and NUMBER with the max number of followers for the user you want returned (maximum is no more than 5 per user).
   Full example: http://127.0.0.1:5000/api/v1/resources/followers?id=jskeet&maxFollowers=2
   
-  Note that maxFollowers will be capped at 5 to prevent timeouts on the PC (each call will increase the base by a power of 5. It will get large quickly).
+  Note that:
+  1) MaxFollowers is an OPTIONAL parameter. It has a default of 5 followers.
+  2) maxFollowers will be capped at 5 to prevent timeouts on the PC (each call will increase the base by a power of 5. It will get large quickly).
   
 
 Finally, this is an unauthenticated application. As such, there can only be so many requests from the same IP per hour before the user is prevented from using the website. 
@@ -27,6 +33,7 @@ From https://developer.github.com/v3/#rate-limiting:
 
 
 
+#####################################################################################################################################
 
 ## Welcome to GitHub Pages
 
