@@ -20,7 +20,7 @@ Followers page: http://127.0.0.1:5000/api/v1/resources/followers?id=NAME&maxFoll
   Full example: http://127.0.0.1:5000/api/v1/resources/followers?id=jskeet&maxFollowers=2
   
   Note that:
-  1) MaxFollowers is an OPTIONAL parameter. It has a default of 5 followers.
+  1) maxFollowers is an OPTIONAL parameter. It has a default of 5 followers. It can be omitted from the query without issue.
   2) maxFollowers will be capped at 5 to prevent timeouts on the PC (each call will increase the base by a power of 5. It will get large quickly).
   
 
