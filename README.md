@@ -4,7 +4,7 @@ It takes those followers and finds their followers (again, up to five followers 
 
 For api implementation:
 
-1) Make sure you have both git and python (3.7) installed locally, or that you are able to run both on your PC.
+1) Make sure you have both git and python (3.7) installed locally, or that you are able to run both on your PC. Make sure you've downloaded and installed Flask as well(http://flask.pocoo.org/docs/1.0/installation/) .
 
 2) Download the code in this repo locally. Make sure that all files (FollowerId, api) are in the api folder
 
